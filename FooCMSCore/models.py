@@ -6,14 +6,6 @@ class PageLayout(models.Model):
 	test = models.CharField(max_length=1)
 
 
-
-class Content(models.Model):
-	name = models.CharField(max_length=15)
-	content_type = models.ForeignKey(ContentType)
-	object_id = models.PositiveIntegerField()
-	content_object = generic.GenericForeignKey('content_type', 'object_id')
-
-
 class ContentBox(models.Model):
 	CONTENT_SIZE_CHOICES = (
 			(1, '1'),
@@ -34,12 +26,15 @@ class ContentBox(models.Model):
 	is_empty = models.BooleanField()
 	content_size = models.IntegerField(choices=CONTENT_SIZE_CHOICES)
 	pageLayout = models.ForeignKey(PageLayout)
+	content_type = models.ForeignKey(ContentType)
+	object_id = models.PositiveIntegerField()
+	content_object = generic.GenericForeignKey('content_type', 'object_id')
 
 
 
 class Page(models.Model):
 	name = models.CharField(max_length=15, unique=True)
-	pageLayout = models.ForeignKey(PageLayout)
+	pageLayout = models.OneToOneField(PageLayout)
 	
 
 

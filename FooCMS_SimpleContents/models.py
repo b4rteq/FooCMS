@@ -14,3 +14,22 @@ class ImageContent(models.Model):
 
 	def __unicode__(self):
 		return self.name
+
+
+class NavigationContent(models.Model):
+	NAVIGATION_TYPE_CHOICES = (
+			(1,"Vertical"),
+			(2, "Horizontal")
+		)
+
+	name = models.CharField(max_length=15)
+	type = models.IntegerField(choices=NAVIGATION_TYPE_CHOICES)
+
+class NavigationLink(models.Model):
+	name = models.CharField(max_length=15)
+	url = models.CharField(max_length=256)
+	priority = models.IntegerField()
+	navigationContent = models.ForeignKey(NavigationContent)
+
+
+

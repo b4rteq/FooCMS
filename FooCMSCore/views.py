@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.template.response import TemplateResponse
 from FooCMSCore.models import Page, PageLayout, ContentBox
+from FooCMS_SimpleContents import views as SimpleContentsViews
 
 def handle_no_such_page(request, page_name):
 	return HttpResponse('No such page')
@@ -29,13 +30,7 @@ def prepare_groups(content_boxes):
 
 def prepare_content(content_box):
 	content_type_name = type(content_box.content_object).__name__
-	if content_type_name == "StaticContent":
-		return content_box.content_object.body
-	elif content_type_name == "ImageContent":
-		return '<img src="/' + content_box.content_object.image.name + '"/>'
-
-	else:
-		return content_box.content_type.model_class()
+	return SimpleContentsViews.GetPreparedContent(content_box.content_object, content_type_name)
 
 
 

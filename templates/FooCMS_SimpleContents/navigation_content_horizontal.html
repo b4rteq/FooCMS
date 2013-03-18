@@ -1,0 +1,9 @@
+<div class="navbar">
+  <div class="navbar-inner">
+  	<ul class="nav">
+  		{% for link in  links %}
+  		<li><a href="{{link.url}}">{{link.name}}</a></li>
+  		{% endfor %}
+  	</ul>
+  </div>
+</div>

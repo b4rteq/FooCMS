@@ -4,7 +4,7 @@
 {% for group in  content_boxes_groups %}
 	<div class="row-fluid">
 	{% for box in  group %}
-		<div class="span{{box.content_size}}"> {{ box.x }} </div>
+		<div class="span{{box.content_size}}"> {{ box.Content|safe }} </div>
 	{% endfor %}
 	</div>
 {% endfor %}

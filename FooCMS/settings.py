@@ -127,7 +127,7 @@ INSTALLED_APPS = (
      'django.contrib.admindocs',
      'FooCMSCore',
      'FooCMS_SimpleContents',
-     'south'
+     'south',
 )
 
 # A sample logging configuration. The only tangible logging

@@ -22,6 +22,21 @@ def prepare_groups(content_boxes):
 	for box in content_boxes:
 		if box.content_level != level:
 			result.append([])
+		box.Content = prepare_content(box)
 		result[len(result)-1].append(box)
 		level = box.content_level
 	return result
+
+def prepare_content(content_box):
+	content_type_name = type(content_box.content_object).__name__
+	if content_type_name == "StaticContent":
+		return content_box.content_object.body
+	elif content_type_name == "ImageContent":
+		return '<img src="/' + content_box.content_object.image.name + '"/>'
+
+	else:
+		return content_box.content_type.model_class()
+
+
+
+

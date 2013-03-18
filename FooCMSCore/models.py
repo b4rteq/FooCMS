@@ -3,7 +3,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 
 class PageLayout(models.Model):
-	test = models.CharField(max_length=1)
+	place_holder = models.CharField(max_length=1)
 
 
 class ContentBox(models.Model):
@@ -30,11 +30,17 @@ class ContentBox(models.Model):
 	object_id = models.PositiveIntegerField()
 	content_object = generic.GenericForeignKey('content_type', 'object_id')
 
+	def __unicode__(self):
+		return 'Level: ' + str(self.content_level) + ' size: ' + str(self.content_size) + ' ( ' + self.pageLayout.page.name + ' )'
+
 
 
 class Page(models.Model):
 	name = models.CharField(max_length=15, unique=True)
 	pageLayout = models.OneToOneField(PageLayout)
+
+	def __unicode__(self):
+		return self.name
 	
 
 
